@@ -5,18 +5,37 @@ import type { SquareValue } from "./Board";
 import { useState } from "react";
 
 export default function Game() {
-  const [xIsNext, setXIsNext] = useState<boolean>(true);
-  // tạo mảng chứa mảng lưu trữ null|X|O, giá trị đầu tiên là mảng toàn null
   const [history, setHistory] = useState<Array<Array<SquareValue>>>([
     Array(9).fill(null),
   ]);
-  const currentSquares: Array<SquareValue> = history[history.length - 1];
+  const [currentMove, setCurrentMove] = useState(0);
+  const xIsNext = currentMove % 2 === 0;
+  const currentSquares: Array<SquareValue> = history[currentMove];
   console.log(history); //check
 
   function handlePlay(nextSquares: Array<SquareValue>) {
-    setHistory([...history, nextSquares]); // "chỉnh" bằng cách dán các dữ liệu cũ + dữ liệu mới
-    setXIsNext(!xIsNext); // Cập nhật trạng thái X/O
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+    setHistory(nextHistory);
+    setCurrentMove(nextHistory.length - 1);
   }
+
+  function jumpTo(nextMove: number): void {
+    setCurrentMove(nextMove);
+  }
+
+  const move = history.map((squares: SquareValue[], move: number) => {
+    let description: string;
+    if (move > 0) {
+      description = "Quay ve buoc #" + move;
+    } else {
+      description = "Vi tri bat dau";
+    }
+    return (
+      <li key={move}>
+        <button onClick={() => jumpTo(move)}>{description}</button>
+      </li>
+    );
+  });
 
   return (
     <>
@@ -29,7 +48,7 @@ export default function Game() {
           />
         </div>
         <div className="game-info">
-          <ol>{/* TODO*/}</ol>
+          <ol>{move}</ol>
         </div>
       </div>
     </>

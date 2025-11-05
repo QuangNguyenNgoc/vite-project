@@ -52,14 +52,16 @@ export default function Board({ xIsNext, squares, onPlay }: BoardProps) {
       nextSquares[i] = "O";
     }
     onPlay(nextSquares);
-
-    //check winner : vì state set chỉ lên lịch cập nhật chứ chưa cập nhật thật
-    const winner: SquareValue = calculateWinner(nextSquares);
-    if (winner) {
-      console.log("The winner is ", winner);
-    }
   }
-
+  //check winner : vì state set chỉ lên lịch cập nhật chứ chưa cập nhật thật
+  const winner: SquareValue = calculateWinner(squares);
+  let status: string;
+  if (winner) {
+    console.log("The winner is ", winner);
+    status = "Winner: " + winner;
+  } else {
+    status = "Current: " + (xIsNext ? "X" : "O");
+  }
   return (
     <>
       <div className="board-row">
@@ -77,6 +79,7 @@ export default function Board({ xIsNext, squares, onPlay }: BoardProps) {
         <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
         <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
       </div>
+      <div>{status}</div>
     </>
   );
 }

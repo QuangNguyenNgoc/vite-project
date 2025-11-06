@@ -75,11 +75,11 @@ h1 {
 }
 
 /* Màu cho X và O */
-.square:has(div[data-value="X"]) {
+.square:has(span[data-value="X"]) {
   color: var(--x-color);
 }
 
-.square:has(div[data-value="O"]) {
+.square:has(span[data-value="O"]) {
   color: var(--o-color);
 }
 

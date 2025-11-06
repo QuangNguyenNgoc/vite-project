@@ -17,7 +17,7 @@ export default function Square({ value, onSquareClick }: squareProps) {
 
   return (
     <button className="square" onClick={onSquareClick}>
-      {value}
+      {value && <span data-value={value}>{value}</span>}
     </button>
   );
 }

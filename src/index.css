@@ -2,8 +2,8 @@
   --square-size: 80px;
   --border-color: #2c3e50;
   --hover-color: #34495e;
-  --x-color: #e74c3c;
-  --o-color: #3498db;
+  --x-color: #e98f85;
+  --o-color: #6facd5;
   --bg-color: #ecf0f1;
 }
 
@@ -75,11 +75,11 @@ h1 {
 }
 
 /* Màu cho X và O */
-.square:has(div[data-value="X"]) {
+.square .X {
   color: var(--x-color);
 }
 
-.square:has(div[data-value="O"]) {
+.square .O {
   color: var(--o-color);
 }
 

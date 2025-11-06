@@ -1,0 +1,136 @@
+:root {
+  --square-size: 80px;
+  --border-color: #2c3e50;
+  --hover-color: #34495e;
+  --x-color: #e74c3c;
+  --o-color: #3498db;
+  --bg-color: #ecf0f1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-color);
+}
+
+h1 {
+  text-align: center;
+  color: var(--border-color);
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.game-board {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background-color: var(--border-color);
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.board-row {
+  display: flex;
+  gap: 5px;
+}
+
+.square {
+  width: var(--square-size);
+  height: var(--square-size);
+  border: none;
+  border-radius: 8px;
+  background-color: white;
+  font-size: calc(var(--square-size) * 0.6);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.square:hover {
+  background-color: var(--hover-color);
+  color: white;
+}
+
+.square:active {
+  transform: scale(0.95);
+}
+
+/* Màu cho X và O */
+.square:has(div[data-value="X"]) {
+  color: var(--x-color);
+}
+
+.square:has(div[data-value="O"]) {
+  color: var(--o-color);
+}
+
+.game-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  min-width: 200px;
+}
+
+.game-info ol {
+  list-style: none;
+  width: 100%;
+}
+
+.game-info button {
+  width: 100%;
+  padding: 8px 16px;
+  background-color: white;
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.game-info button:hover {
+  background-color: var(--border-color);
+  color: white;
+}
+
+@media (min-width: 768px) {
+  .game {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+/* Animation cho X và O */
+@keyframes pop-in {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.square span {
+  animation: pop-in 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
